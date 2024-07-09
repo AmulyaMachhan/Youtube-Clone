@@ -1,10 +1,11 @@
-class ApiResponse {
-  constructor(statusCode, data, message) {
-    this.statusCode = statusCode;
-    this.success = statusCode < 400;
-    this.message = message;
-    this.data = data;
+// ASYNCHRONOUS FUNCTION HANDLER USING TRY CATCH BLOCK
+const asyncHandler = (func) => async (req, res, next) => {
+  try {
+    await func(req, res, next);
+  } catch (error) {
+    res.status(error.code || 500).json({
+      success: true,
+      message: error.message,
+    });
   }
-}
-
-export { ApiResponse };
+};
