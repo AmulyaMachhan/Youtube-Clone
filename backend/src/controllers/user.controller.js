@@ -224,3 +224,36 @@ const generateAccessTokenFromRefreshToken = asyncHandler(async (req, res) => {
     throw new ApiError(401, "Invalid Refresh Token");
   }
 });
+
+const changeCurrentPassword = asyncHandler(async (req, res) => {
+  // Steps to change password
+  // 1. Extract old , new and confirm password details from request body
+  // 2. Check whether new and confirm password are the same.
+  // 3. Extract and find user from req.users which was injected during the middleware.
+  // 4. Check whether the old password is the same as the password stored inside the database using the method isPasswordCorrect.
+  // 5. Update and save the new password in the user model.
+  // 6. Generate the response
+
+  const { oldPassword, newPassword, confirmPassword } = req.body;
+
+  if (newPassword !== confirmPassword) {
+    throw new ApiError(400, "New and confirm password do not match");
+  }
+
+  const user = await User.findById(req.users?._id);
+
+  const isPasswordValid = await user.isPasswordCorrect(oldPassword);
+
+  if (!isPasswordValid) {
+    throw new ApiError(401, "Unauthorized Access");
+  }
+
+  user.password = newPassword;
+  await user.save({
+    validateBeforeSave: false,
+  });
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, {}, "Password Changed Successfully"));
+});
