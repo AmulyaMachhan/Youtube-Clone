@@ -165,3 +165,62 @@ const loginUser = asyncHandler(async (req, res) => {
       )
     );
 });
+
+const generateAccessTokenFromRefreshToken = asyncHandler(async (req, res) => {
+  // Steps to generate access token from refresh token-
+  // 1. Access refresh token from req cookies or body.
+  // 2. Validate refresh Token.
+  // 3. Decode this refresh token from jwt verification.
+  // 4. Validate the decoded token.
+  // 5. Find user based on this token.
+  // 6. Validate the user.
+  // 7. Check whether the stored refresh token and the incoming the refresh token are the same.
+  // 8. Generate the new refresh and access tokens using the previously build function.
+  // 9. Return a response and set the cookies and its options for the new refresh and access token.
+
+  const incomingRefreshToken = req.cookie.refreshToken || req.body.refreshToken;
+
+  if (!incomingRefreshToken) {
+    throw new ApiError(401, "Unauthorized Access");
+  }
+
+  try {
+    const decodedToken = jwt.verify(
+      incomingRefreshToken,
+      process.env.REFRESH_TOKEN_SECRET
+    );
+
+    const user = await User.findById(decodedToken?._id);
+
+    if (!user) {
+      throw new ApiError(401, "Invalid Refresh Token");
+    }
+
+    if (incomingRefreshToken !== user.refreshToken) {
+      throw new ApiError(401, "Invalid Refresh Token");
+    }
+
+    const { newRefreshToken, newAccessToken } = generateAccessAndRefreshTokens(
+      user._id
+    );
+
+    const options = {
+      httpOnly: true,
+      secure: true,
+    };
+
+    return res
+      .status(200)
+      .cookie("accessToken", newAccessToken, options)
+      .cookie("refreshToken", newRefreshToken, options)
+      .json(
+        new ApiResponse(
+          200,
+          { accessToken: newAccessToken, refreshToken: newRefreshToken },
+          "New Access Token Generated Successfully"
+        )
+      );
+  } catch (error) {
+    throw new ApiError(401, "Invalid Refresh Token");
+  }
+});
