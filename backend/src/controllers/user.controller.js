@@ -335,3 +335,46 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, user, "Avatar Uploaded Successfully"));
 });
+
+const updateUserCoverImage = asyncHandler(async (req, res) => {
+  // Steps to update user cover image -
+  // 1. Access local file path using req.file of the multer middleware.
+  // 2. Validate if the local file path is present.
+  // 3. Upload the new cover image on cloudinary.
+  // 4. Find the user based on the req.users authentication middleware.
+  // 5. Extract the coverImage url present in user.
+  // 6. Extract the public Id from the coverImage URL.
+  // 7. Delete the coverImage from the Cloudinary.
+  // 8. store the new url in the user and save
+  // 9. Return the response
+
+  const coverImageLocalPath = req.file?.path;
+
+  if (!coverImageLocalPath) {
+    throw new ApiError(200, "Error while uploading the cover image on server");
+  }
+
+  const coverImage = await uploadOnCloudinary(coverImageLocalPath);
+
+  const user = await User.findById(req.users?._id);
+
+  const coverImageURL = user.coverImage;
+
+  const publicID = coverImageURL.split("/").pop().split(".")[0]; // Extract public ID from URL
+  deleteFromCloudinary(publicID);
+
+  user.coverImage = coverImage;
+  user.save({
+    validateBeforeSave: false,
+  });
+
+  const updatedUser = await User.findById(req.users?._id).select(
+    "-password -refreshToken"
+  );
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(200, updatedUser, "CoverImage Uploaded Successfully")
+    );
+});
