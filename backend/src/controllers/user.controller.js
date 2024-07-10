@@ -297,3 +297,41 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, user, "Account Details Updated Successfully"));
 });
+
+const updateUserAvatar = asyncHandler(async (req, res) => {
+  // Steps to update the user avatar image
+  // 1. Get the local file path of the image stored during the multer middleware.
+  // 2. Check whether the local file path is present.
+  // 3. Upload the file on cloudinary platform.
+  // 4. Check where the cloudinary url is present.
+  // 5. Find and update the user using the req.user injected during the middleware.
+  // 6. Return the response
+
+  const avatarLocalPath = req.file?.path; //Before we used files because multiple fields were uploaded during registering phase but here a singe file is updloaded.
+
+  if (!avatarLocalPath) {
+    throw new ApiError(400, "Error in Uploading Avatar File");
+  }
+
+  const avatar = await uploadOnCloudinary(avatarLocalPath);
+
+  if (!avatar.url) {
+    throw new ApiError(401, "Error in uploading avatar image on cloudinary");
+  }
+
+  const user = await User.findByIdAndUpdate(
+    req.users?._id,
+    {
+      $set: {
+        avatar: avatar.url,
+      },
+    },
+    {
+      new: true, //It returns the update values of the user
+    }
+  ).select("-password -refreshToken");
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, user, "Avatar Uploaded Successfully"));
+});
