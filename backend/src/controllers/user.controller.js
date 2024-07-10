@@ -8,6 +8,33 @@ import {
 import { ApiResponse } from "../utils/apiResponse.js";
 import jwt from "jsonwebtoken";
 
+const generateAccessAndRefreshTokens = async (userid) => {
+  try {
+    const user = await User.findById(userid);
+
+    if (!user) {
+      throw new ApiError(
+        500,
+        "User invalid during refresh and access token generation"
+      );
+    }
+    const accessToken = user.generateAccessToken();
+    const refreshToken = user.generateRefreshToken();
+
+    user.refreshToken = refreshToken;
+    await user.save({
+      validateBeforeSave: false,
+    });
+
+    return { refreshToken, accessToken };
+  } catch (error) {
+    throw new ApiError(
+      500,
+      "Failed during generation of access and refresh token"
+    );
+  }
+};
+
 const registerUser = asyncHandler(async (req, res) => {
   // Steps to register a user
   // 1. Extract neccessary fields from request body
