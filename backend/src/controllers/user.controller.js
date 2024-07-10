@@ -266,3 +266,34 @@ const getCurrentUser = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, req.users, "User fetched Successfully"));
 });
+
+const updateAccountDetails = asyncHandler(async (req, res) => {
+  // Steps to update the account details of the user
+  // 1. Extract user information to be updated from the request body.
+  // 2. Validate the user information.
+  // 3. Find and the update the user based on req.users which was injected in the request body during middleware.
+  // 4. Return the response.
+
+  const { fullName, email } = req.body;
+
+  if (!fullName && !email) {
+    throw new ApiError(400, "All fields are required");
+  }
+
+  const user = await User.findByIdAndUpdate(
+    req.users?._id,
+    {
+      $set: {
+        fullName,
+        email: email,
+      },
+    },
+    {
+      new: true,
+    }
+  ).select("-password -refreshToken");
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, user, "Account Details Updated Successfully"));
+});
