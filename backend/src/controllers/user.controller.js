@@ -78,3 +78,63 @@ const registerUser = asyncHandler(async (req, res) => {
     .status(201)
     .json(new ApiResponse(200, createdUser, "User registered Successfully"));
 });
+
+const loginUser = asyncHandler(async (req, res) => {
+  // Steps to login a user
+  // 1. Extract user data from request.
+  // 2. Validate username and email.
+  // 3. Find user with that username and email and throw error if user does not exist.
+  // 4. Check if password is correct.
+  // 5. Generate access and refresh tokens.
+  // 6. Return a response and send cookies.
+  const { email, username, password } = req.body;
+
+  console.log(username);
+
+  if (email === "" || username === "") {
+    throw new ApiError(409, "Username or Email is required");
+  }
+
+  const user = await User.findOne({
+    $or: [{ username }, { email }],
+  });
+
+  if (!user) {
+    throw new ApiError(404, "User does not exist");
+  }
+
+  const isPasswordValid = await user.isPasswordCorrect(password);
+
+  if (!isPasswordValid) {
+    throw new ApiError(401, "Password Incorrect");
+  }
+
+  const { refreshToken, accessToken } = await generateAccessAndRefreshTokens(
+    user._id
+  );
+
+  const loggedInUser = await User.findById(user._id).select(
+    "-password -refreshToken"
+  );
+
+  const options = {
+    httpOnly: true,
+    secure: true,
+  };
+
+  return res
+    .status(200)
+    .cookie("accessToken", accessToken, options)
+    .cookie("refreshToken", refreshToken, options)
+    .json(
+      new ApiResponse(
+        200,
+        {
+          user: loggedInUser,
+          accessToken,
+          refreshToken,
+        },
+        "User Logged In Successfully"
+      )
+    );
+});
