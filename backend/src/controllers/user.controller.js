@@ -257,3 +257,12 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, {}, "Password Changed Successfully"));
 });
+
+const getCurrentUser = asyncHandler(async (req, res) => {
+  // Steps to get the current user detail-
+  // Return the response and embed req.user data from the middleware injected
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, req.users, "User fetched Successfully"));
+});
