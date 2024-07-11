@@ -7,10 +7,6 @@ import {
   logoutUser,
   generateAccessTokenFromRefreshToken,
   changeCurrentPassword,
-  getCurrentUser,
-  updateAccountDetails,
-  updateUserAvatar,
-  updateUserCoverImage,
 } from "../controllers/user.controller.js";
 
 const router = Router();
@@ -35,3 +31,5 @@ router.route("/login").post(loginUser);
 router.route("/logout").post(verifyJWT, logoutUser);
 
 router.route("/refresh-token").post(generateAccessTokenFromRefreshToken);
+
+router.route("/change-current-password").post(verifyJWT, changeCurrentPassword);
