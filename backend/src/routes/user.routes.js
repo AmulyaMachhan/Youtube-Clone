@@ -5,6 +5,12 @@ import {
   registerUser,
   loginUser,
   logoutUser,
+  generateAccessTokenFromRefreshToken,
+  changeCurrentPassword,
+  getCurrentUser,
+  updateAccountDetails,
+  updateUserAvatar,
+  updateUserCoverImage,
 } from "../controllers/user.controller.js";
 
 const router = Router();
