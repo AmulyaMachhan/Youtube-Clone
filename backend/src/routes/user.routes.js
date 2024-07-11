@@ -33,3 +33,5 @@ router.route("/login").post(loginUser);
 
 // Secured Routes
 router.route("/logout").post(verifyJWT, logoutUser);
+
+router.route("/refresh-token").post(generateAccessTokenFromRefreshToken);
