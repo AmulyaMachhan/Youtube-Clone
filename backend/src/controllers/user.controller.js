@@ -378,3 +378,15 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
       new ApiResponse(200, updatedUser, "CoverImage Uploaded Successfully")
     );
 });
+
+export {
+  registerUser,
+  loginUser,
+  logoutUser,
+  generateAccessTokenFromRefreshToken,
+  changeCurrentPassword,
+  getCurrentUser,
+  updateAccountDetails,
+  updateUserAvatar,
+  updateUserCoverImage,
+};
