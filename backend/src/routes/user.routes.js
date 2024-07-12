@@ -10,6 +10,7 @@ import {
   getCurrentUser,
   updateAccountDetails,
   updateUserAvatar,
+  updateUserCoverImage,
 } from "../controllers/user.controller.js";
 
 const router = Router();
@@ -43,3 +44,6 @@ router.route("/update-account-details").patch(verifyJWT, updateAccountDetails);
 router
   .route("/update-user-avatar")
   .patch(verifyJWT, upload.single("avatar"), updateUserAvatar);
+router
+  .route("/update-user-cover-image")
+  .patch(verifyJWT, upload.single("coverImage"), updateUserCoverImage);
