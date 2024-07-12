@@ -47,3 +47,5 @@ router
 router
   .route("/update-user-cover-image")
   .patch(verifyJWT, upload.single("coverImage"), updateUserCoverImage);
+
+export default router;
