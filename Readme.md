@@ -125,6 +125,7 @@ http://localhost:5000
 
 ## Folder Structure
 
+```
 youtube-clone/
 ├── backend/
 │   ├── public/
@@ -158,7 +159,7 @@ youtube-clone/
 │   │   └── index.js
 │   └── package.json
 └── README.md
-
+```
 
 ## API Endpoints
 
