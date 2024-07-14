@@ -158,3 +158,37 @@ youtube-clone/
 │ │ └── index.js
 │ └── package.json
 └── README.md
+
+## API Endpoints
+
+### **Authentication:**
+
+- **POST** `/api/auth/register` - Register a new user
+- **POST** `/api/auth/login` - Login a user
+
+### **Videos:**
+
+- **GET** `/api/videos` - Get all videos
+- **GET** `/api/videos/:id` - Get video by ID
+- **POST** `/api/videos` - Upload a new video
+- **PUT** `/api/videos/:id` - Update video details
+- **DELETE** `/api/videos/:id` - Delete a video
+
+### **Comments:**
+
+- **POST** `/api/comments` - Add a new comment
+- **GET** `/api/comments/:videoId` - Get all comments for a video
+- **DELETE** `/api/comments/:id` - Delete a comment
+
+### **Likes/Dislikes:**
+
+- **POST** `/api/videos/:id/like` - Like a video
+- **POST** `/api/videos/:id/dislike` - Dislike a video
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
