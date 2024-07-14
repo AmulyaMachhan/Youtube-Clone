@@ -127,37 +127,38 @@ http://localhost:5000
 
 youtube-clone/
 ├── backend/
-│ ├── public/
-│ │ └── temp/
-│ ├── src/
-│ │ ├── controllers/
-│ │ ├── models/
-│ │ ├── routes/
-│ │ ├── middlewares/
-│ │ ├── db/
-│ │ ├── utils/
-│ │ ├── app.js
-│ │ ├── constants.js
-│ │ └── index.js
-│ ├── .env
-│ ├── .gitignore
-│ ├── .prettierignore
-│ ├── .prettierrc
-│ ├── package-lock.json
-│ ├── package.json
-│ └── Readme.md
+│   ├── public/
+│   │   └── temp/
+│   ├── src/
+│   │   ├── controllers/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── middlewares/
+│   │   ├── db/
+│   │   ├── utils/
+│   │   ├── app.js
+│   │   ├── constants.js
+│   │   └── index.js
+│   ├── .env
+│   ├── .gitignore
+│   ├── .prettierignore
+│   ├── .prettierrc
+│   ├── package-lock.json
+│   ├── package.json
+│   └── Readme.md
 ├── frontend/
-│ ├── public/
-│ ├── src/
-│ │ ├── components/
-│ │ ├── pages/
-│ │ ├── redux/
-│ │ ├── styles/
-│ │ ├── utils/
-│ │ ├── App.js
-│ │ └── index.js
-│ └── package.json
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── redux/
+│   │   ├── styles/
+│   │   ├── utils/
+│   │   ├── App.js
+│   │   └── index.js
+│   └── package.json
 └── README.md
+
 
 ## API Endpoints
 
