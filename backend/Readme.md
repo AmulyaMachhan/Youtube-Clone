@@ -114,3 +114,13 @@ Open two terminals:
 ```bash
 http://localhost:5000
 ```
+
+## Usage
+
+- **Register/Login:** Create an account or log in with an existing account.
+- **Upload Videos:** Click the upload button to upload videos and fill in the metadata.
+- **Browse & Search:** Explore uploaded videos or search using the search bar.
+- **Watch Videos:** Click on a video thumbnail to watch it, like/dislike, and leave comments.
+- **Manage Videos:** Navigate to your profile to manage (edit or delete) your uploaded videos.
+
+## Folder Structure
