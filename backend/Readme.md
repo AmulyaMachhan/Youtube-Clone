@@ -90,3 +90,27 @@ CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
 CLOUDINARY_API_KEY=your_cloudinary_api_key
 CLOUDINARY_API_SECRET=your_cloudinary_api_secret
 ```
+
+5. **Run the development server:**
+
+Open two terminals:
+
+- Backend:
+
+> ```bash
+> cd backend
+> npm run dev
+> ```
+
+- Frontend:
+
+> ```bash
+> cd frontend
+> npm start
+> ```
+
+6. **Open your browser and navigate to:**
+
+```bash
+http://localhost:5000
+```
