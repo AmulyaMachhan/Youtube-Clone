@@ -68,28 +68,28 @@ A full-stack YouTube clone application built with the MERN stack (MongoDB, Expre
 
 3. **Install dependencies for frontend:**
 
-```bash
-cd ../frontend
-npm install
-```
+    ```bash
+    cd ../frontend
+    npm install
+    ```
 
 4. **Create environment variables:**
 
-Create a .env file in the backend directory with the following variables:
+  Create a .env file in the backend directory with the following variables:
 
-```bash
-PORT=your_port
-MONGO_URI=your_mongodb_uri
-CORS_ORIGIN=*
-JWT_SECRET=your_jwt_secret
-ACCESS_TOKEN_SECRET=your_access_token_secret
-ACCESS_TOKEN_EXPIRY=1d
-REFRESH_TOKEN_SECRET=your_refresh_token_secret
-REFRESH_TOKEN_EXPIRY=10d
-CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
-CLOUDINARY_API_KEY=your_cloudinary_api_key
-CLOUDINARY_API_SECRET=your_cloudinary_api_secret
-```
+  ```bash
+  PORT=your_port
+  MONGO_URI=your_mongodb_uri
+  CORS_ORIGIN=*
+  JWT_SECRET=your_jwt_secret
+  ACCESS_TOKEN_SECRET=your_access_token_secret
+  ACCESS_TOKEN_EXPIRY=1d
+  REFRESH_TOKEN_SECRET=your_refresh_token_secret
+  REFRESH_TOKEN_EXPIRY=10d
+  CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+  CLOUDINARY_API_KEY=your_cloudinary_api_key
+  CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+  ```
 
 5. **Run the development server:**
 
