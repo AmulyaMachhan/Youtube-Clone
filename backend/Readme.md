@@ -124,3 +124,37 @@ http://localhost:5000
 - **Manage Videos:** Navigate to your profile to manage (edit or delete) your uploaded videos.
 
 ## Folder Structure
+
+youtube-clone/
+├── backend/
+│ ├── public/
+│ │ └── temp/
+│ ├── src/
+│ │ ├── controllers/
+│ │ ├── models/
+│ │ ├── routes/
+│ │ ├── middlewares/
+│ │ ├── db/
+│ │ ├── utils/
+│ │ ├── app.js
+│ │ ├── constants.js
+│ │ └── index.js
+│ ├── .env
+│ ├── .gitignore
+│ ├── .prettierignore
+│ ├── .prettierrc
+│ ├── package-lock.json
+│ ├── package.json
+│ └── Readme.md
+├── frontend/
+│ ├── public/
+│ ├── src/
+│ │ ├── components/
+│ │ ├── pages/
+│ │ ├── redux/
+│ │ ├── styles/
+│ │ ├── utils/
+│ │ ├── App.js
+│ │ └── index.js
+│ └── package.json
+└── README.md
